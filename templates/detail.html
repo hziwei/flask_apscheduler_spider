@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1 style="text-align: center">商品详情</h1>
+</div>
+<div style="width: 1000px;margin: 0 auto ;">
+    <div style="width: 400px;height: 450px;float: left;margin-top: 50px;">
+        <img style="width: 400px;height: 450px;"src="{{ result['pictUrl'] }}" alt="">
+    </div>
+    <div style="float: left;margin-top: 50px;margin-left: 20px;width: 520px;">
+         <span style="font-size: 20px;">{{ result['title'][0] }}</span><br>
+        <span style="font-size: 15px;color: red;">{{ result['sub_title'][0] }}</span><br>
+        <div style="height: 100px;width: 520px;background: #cccccc;margin: 20px;">
+            <span style="font-size: 12px;display: inline-block;margin-right: 45px;">价格</span><span><s>{{ result['reservePrice'] }}</s></span><br>
+            <span style="font-size: 12px;display: inline-block;margin-right: 30px;">促销价</span><span style="font-size: 25px;color: red;">￥{{ result['zkPrice'] }}</span><br>
+        </div>
+        <span style="font-size: 12px;display: inline-block;margin-right: 43px;">尺码</span>
+        <div style="width: 400px;float: right;">
+        {% for item in result['yardage'] %}
+        <span style="display: inline-block;border: 1px solid #aaaaaa;text-align: center;height: 30px;line-height: 30px;margin-left: 20px;margin-bottom: 20px;">{{ item }}</span>
+        {% endfor %}
+        </div>
+        <br>
+
+        <div>
+        <span style="font-size: 12px;display: inline-block;line-height: 40px;margin-right: 40px;">颜色分类</span>
+            <div style="width: 400px;float: right;">
+                {% for item in result['sub_img_list'] %}
+                     <img style="display: inline-block;margin: 10px;" src="{{ item[15:-19] }}" alt="">
+                {% endfor %}
+            </div>
+        </div>
+    <br>
+    </div>
+
+</div>
+</body>
+</html>

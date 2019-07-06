@@ -1,0 +1,28 @@
+{% for item in result %}
+        <div style="float: left;margin-right: 20px; margin-bottom: 20px;">
+            <div style=" border: 1px solid #ccc;">
+                <a src="/detail/good_id={{ item['auctionId'] }}" href="/detail/{{ item['auctionId'] }}/">
+                <img style="width: 200px;height: 250px;" src="{{ item['pictUrl'] }}">
+                </br>
+                <span style="font-size: 10px">
+                    {{ item['title'][:10] }}
+                </span>
+                </br>
+                <span style="display: none;">剩余{{ item['couponLeftCount'] }}张</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['zkPrice'] }}</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['tkCommonRate'] }}%</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['tkCommonFee'] }}</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">券后</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">营销</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">佣金</span>
+                </br>
+                <span style="display: inline-block; color: red;border: 1px solid red; font-size: 12px; margin-left: 20px;">券 {{ item['couponAmount'] }}元</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">{{ item['shopTitle'][:7] }}</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 5px;">月销量 {{ item['biz30day'] }}</span>
+            </a>
+            </div>
+        </div>
+{% endfor %}

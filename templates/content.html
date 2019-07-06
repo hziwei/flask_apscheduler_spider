@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/static/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div><h1 style="align-content: center;text-align: center">淘宝促销</h1></div>
+<div style="width: 1200px;margin: 0 auto;background: #aaaaaa;">
+    <div class="main">
+        {% for item in result %}
+        <div style="float: left;margin-right: 20px; margin-bottom: 20px;">
+            <div style=" border: 1px solid #ccc;">
+                <a src="/detail/good_id={{ item['auctionId'] }}" href="/detail/{{ item['auctionId'] }}/">
+                <img style="width: 200px;height: 250px;" src="{{ item['pictUrl'] }}">
+                </br>
+                <span style="font-size: 10px">
+                    {{ item['title'][:10] }}
+                </span>
+                </br>
+                <span style="display: none;">剩余{{ item['couponLeftCount'] }}张</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['zkPrice'] }}</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['tkCommonRate'] }}%</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;color: red;">{{ item['tkCommonFee'] }}</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">券后</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">营销</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">佣金</span>
+                </br>
+                <span style="display: inline-block; color: red;border: 1px solid red; font-size: 12px; margin-left: 20px;">券 {{ item['couponAmount'] }}元</span>
+                </br>
+                <span style="font-size: 12px;display: inline-block;margin: 0 15px;">{{ item['shopTitle'][:7] }}</span>
+                <span style="font-size: 12px;display: inline-block;margin: 0 5px;">月销量 {{ item['biz30day'] }}</span>
+            </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<script type="text/javascript">
+    $(function () {
+        var page =1,  //分页码
+        off_on = true,  //分页开关（滚动加载方法1中用到）
+        timers = null;  //定时器（滚动加载方法2中用的）
+        // 滚动加载方法1
+
+        $(document).scroll(function () {
+            // 当时滚动到离底部60px时加载下一页
+            if (($('html')[0].scrollTop  + $(window).height() + 60 ) >= $('html')[0].scrollHeight) {
+                //这里用 [ off_on ] 来控制是否加载 （这样就解决了 当上页的条件满足时，一下子加载多次的问题啦）
+                if (off_on) {
+                    off_on = false;
+                    page++;
+                    console.log("第"+page+"页");
+                    //LoadingDataFn();  //调用执行上面的加载方法
+                    $.get('/',{'page':page}, function (result, state, xhr) {
+                        console.log(result);
+                        off_on=true;
+                        $('.main').append(result)
+                    })
+                }
+            }
+        });
+    });
+
+</script>
+</div>
+
+</body>
+</html>
