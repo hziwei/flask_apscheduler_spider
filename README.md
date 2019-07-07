@@ -3,7 +3,7 @@
 
 * 项目目录
 
-  ![1562406042744](C:\Users\黄自卫\AppData\Roaming\Typora\typora-user-images\1562406042744.png)
+  ![1562406042744](./static/1.png)
 
   
 
